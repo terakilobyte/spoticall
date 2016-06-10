@@ -25,13 +25,12 @@ defmodule Spoticall.Spotify.Query do
   end
 
   defp fetch_from_spotify(query_str) do
-    %{:body => response} = HTTPotion.get("https://api.spotify.com/v1/search?type=track&q=" <> query_str)
+    %{:body => response} = HTTPotion.get("https://api.spotify.com/v1/search?type=track&q=" <> URI.encode(query_str))
     {:ok, body} = Poison.decode(response)
     body
     |> get_in(["tracks", "items"])
     |> List.first
     |> get_in(["preview_url"])
-    |> IO.inspect
   end
 
 end

@@ -1,0 +1,24 @@
+<h2>Listing twiml</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for twiml <- @twiml do %>
+    <tr>
+
+      <td class="text-right">
+        <%= link "Show", to: twiml_path(@conn, :show, twiml), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: twiml_path(@conn, :edit, twiml), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: twiml_path(@conn, :delete, twiml), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New twiml", to: twiml_path(@conn, :new) %>

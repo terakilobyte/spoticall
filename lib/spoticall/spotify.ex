@@ -7,7 +7,6 @@ defmodule Spoticall.Spotify do
   end
 
   def search(song, twilio_data) do
-    IO.puts("search called")
     spawn_search(song, twilio_data)
     |> await_results
   end
@@ -28,7 +27,7 @@ defmodule Spoticall.Spotify do
     results
   end
 
-  defp await_result(query_process, result, timeout) do
+  defp await_result(query_process, result, _timeout) do
     {pid, monitor_ref, query_ref} = query_process
 
     receive do
@@ -51,7 +50,7 @@ defmodule Spoticall.Spotify do
 
 
   defp notify_success(preview_url, %{from: from, to: to}) do
-    IO.puts("In notify success with #{preview_url} and twilio data from: #{from} to: #{to}")
+    IO.puts("#{preview_url}")
     # ExTwilio.Call.create([from: to, to: from, url: "http://tkb.ngrok.com/api/twiml-for?song=#{URI.encode_www_form(preview_url)}" ])
   end
 
